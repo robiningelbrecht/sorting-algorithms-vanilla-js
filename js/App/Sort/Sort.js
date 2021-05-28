@@ -1,4 +1,4 @@
-import CompletedIndex from "../Index/CompletedIndex.js";
+import SortedIndex from "../Index/CompletedIndex.js";
 
 export default class Sort {
 
@@ -40,7 +40,7 @@ export default class Sort {
 
     // Complete visual.
     this.visual.resetIndexes();
-    this.visual.setIndexes([new CompletedIndex(this.visual.getSeries().map(function (_, i) {
+    this.visual.setIndexes([new SortedIndex(this.visual.getSeries().map(function (_, i) {
       return i
     }))])
 

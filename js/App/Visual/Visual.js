@@ -27,7 +27,9 @@ export default class Visual {
   }
 
   setIndexes(indexes) {
-    this.indexes = indexes;
+    indexes.forEach((index) => {
+      this.indexes[index.getWeight()] = index;
+    });
   }
 
   _getSeriesContainer() {

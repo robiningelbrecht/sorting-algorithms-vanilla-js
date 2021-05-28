@@ -11,4 +11,8 @@ export default class ComparingIndex {
   getList(){
     return this.list;
   }
+
+  getWeight(){
+    return 0;
+  }
 }

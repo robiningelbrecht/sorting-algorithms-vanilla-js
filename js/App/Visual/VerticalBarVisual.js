@@ -1,5 +1,5 @@
 import Visual from "./Visual.js";
-import CompletedIndex from "../Index/CompletedIndex.js";
+import SortedIndex from "../Index/CompletedIndex.js";
 import SwappingIndex from "../Index/SwappingIndex.js";
 import ComparingIndex from "../Index/ComparingIndex.js";
 
@@ -8,7 +8,7 @@ export default class VerticalBarVisual extends Visual {
   constructor(parent_element, series) {
     super(parent_element, series);
     this.availableIndexTypes = [
-      new CompletedIndex([]),
+      new SortedIndex([]),
       new SwappingIndex([]),
       new ComparingIndex([])
     ];
@@ -52,10 +52,6 @@ export default class VerticalBarVisual extends Visual {
       progress_bar.setAttribute('aria-valuenow', value);
       progress_bar.style.height = value + "%";
       progress_bar.innerText = value;
-
-      this.availableIndexTypes.forEach((Index) => {
-        progress_bar.classList.remove(Index.getType());
-      });
 
       let progress = document.createElement('div');
       progress.classList.add(...['progress', 'progress-vertical']);

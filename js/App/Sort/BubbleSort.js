@@ -2,7 +2,7 @@ import Utils from '../Utils.js'
 import Sort from "./Sort.js";
 import ComparingIndex from "../Index/ComparingIndex.js";
 import SwappingIndex from "../Index/SwappingIndex.js";
-import CompletedIndex from "../Index/CompletedIndex.js";
+import SortedIndex from "../Index/CompletedIndex.js";
 
 export default class BubbleSort extends Sort {
 
@@ -53,7 +53,7 @@ export default class BubbleSort extends Sort {
         sorted.push(len - j);
       }
 
-      this.visual.setIndexes([new CompletedIndex(sorted)]);
+      this.visual.setIndexes([new SortedIndex(sorted)]);
     } while (swapped);
   }
 

@@ -1,4 +1,4 @@
-export default class CompletedIndex {
+export default class SortedIndex {
 
   constructor(list) {
     this.list = list;
@@ -10,5 +10,9 @@ export default class CompletedIndex {
 
   getList(){
     return this.list;
+  }
+
+  getWeight(){
+    return 2;
   }
 }

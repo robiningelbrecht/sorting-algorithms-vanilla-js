@@ -11,4 +11,8 @@ export default class SwappingIndex {
   getList(){
     return this.list;
   }
+
+  getWeight(){
+    return 1;
+  }
 }

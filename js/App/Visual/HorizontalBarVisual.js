@@ -16,15 +16,6 @@ export default class HorizontalBarVisual extends Visual {
       progress_bars[index].setAttribute('aria-valuenow', value);
       progress_bars[index].style.width = value + "%";
       progress_bars[index].innerText = value;
-      if (this.comparingIndexes !== false && this.comparingIndexes.indexOf(index) !== -1) {
-        progress_bars[index].classList.add('bg-warning');
-      }
-      if (this.swappingIndexes !== false && this.swappingIndexes.indexOf(index) !== -1) {
-        progress_bars[index].classList.add('bg-danger');
-      }
-      if (this.sortedIndexes !== false && this.sortedIndexes.indexOf(index) !== -1) {
-        progress_bars[index].classList.add('bg-success');
-      }
     });
   }
 
@@ -40,10 +31,6 @@ export default class HorizontalBarVisual extends Visual {
       progress_bar.setAttribute('aria-valuenow', value);
       progress_bar.style.width = value + "%";
       progress_bar.innerText = value;
-
-      progress_bar.classList.remove('bg-danger');
-      progress_bar.classList.remove('bg-warning');
-      progress_bar.classList.remove('bg-success');
 
       let progress = document.createElement('div');
       progress.classList.add(...['progress', 'progress-horizontal']);
