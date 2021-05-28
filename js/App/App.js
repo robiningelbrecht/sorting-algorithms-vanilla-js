@@ -23,6 +23,13 @@ export default class App {
     this.randomizeVisual();
   }
 
+  updateVisual(visual){
+    this.visual = visual;
+    this.sort.setVisual(visual);
+
+    this.randomizeVisual();
+  }
+
   runSort() {
     if (!this.sort) {
       return;
@@ -45,6 +52,7 @@ export default class App {
     }
 
     this.visual.setSeries(Utils.getRandomSeries(this.visual.series.length));
+    this.visual.resetIndexes();
     this.visual.draw(this.sort.getLegend());
   }
 

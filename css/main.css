@@ -2,15 +2,33 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-#visualize .col{
+#visualize.VerticalBarVisual .col{
     padding: 0 3px;
 }
 
-.progress.progress-vertical {
+#visualize.HorizontalBarVisual .col{
+    padding: 3px 0;
+}
+
+.progress.progress-horizontal,
+.progress.progress-vertical{
     background-color: transparent;
+    border-radius: 0;
+}
+
+.progress.progress-horizontal{
+    height: 30px;
+}
+
+.progress.progress-vertical {
     min-height: 400px;
     align-items: flex-end;
-    border-radius: 0;
+}
+
+.progress.progress-horizontal .progress-bar {
+    border-radius: 0 .25rem .25rem 0;
+    align-items: start;
+    padding: 0 3px;
 }
 
 .progress.progress-vertical .progress-bar {

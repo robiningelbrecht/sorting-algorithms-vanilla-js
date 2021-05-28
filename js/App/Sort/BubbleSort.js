@@ -1,5 +1,8 @@
 import Utils from '../Utils.js'
 import Sort from "./Sort.js";
+import ComparingIndex from "../Index/ComparingIndex.js";
+import SwappingIndex from "../Index/SwappingIndex.js";
+import CompletedIndex from "../Index/CompletedIndex.js";
 
 export default class BubbleSort extends Sort {
 
@@ -24,15 +27,13 @@ export default class BubbleSort extends Sort {
     do {
       swapped = false;
       for (let i = 0; i < len; i++) {
-        series = this.visual.getSeries();
-        this.visual.setComparingIndexes([i, i + 1]);
+        this.visual.setIndexes([new ComparingIndex([i, i + 1])])
         this.visual.redraw();
         await Utils.sleep(this.speed);
 
         if (series[i] > series[i + 1]) {
           let tmp = series[i];
-          this.visual.setSwappingIndexes([i, i + 1]);
-          this.visual.setComparingIndexes(false);
+          this.visual.setIndexes([new SwappingIndex([i, i + 1]), new ComparingIndex([])])
 
           series[i] = series[i + 1];
           series[i + 1] = tmp;
@@ -40,7 +41,7 @@ export default class BubbleSort extends Sort {
 
           this.visual.setSeries(series);
           this.visual.redraw();
-          this.visual.setSwappingIndexes(false);
+          this.visual.setIndexes([new SwappingIndex([])])
 
           await Utils.sleep(this.speed);
         }
@@ -51,7 +52,8 @@ export default class BubbleSort extends Sort {
       for (let j = 1; j <= count_sorted; j++) {
         sorted.push(len - j);
       }
-      this.visual.setSortedIndexes(sorted);
+
+      this.visual.setIndexes([new CompletedIndex(sorted)]);
     } while (swapped);
   }
 

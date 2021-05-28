@@ -1,9 +1,15 @@
+import CompletedIndex from "../Index/CompletedIndex.js";
+
 export default class Sort {
 
   constructor(visual, speed) {
     this.visual = visual;
     this.speed = speed;
     this.isRunning = false;
+  }
+
+  setVisual(visual){
+    this.visual = visual;
   }
 
   setSpeed(speed) {
@@ -27,19 +33,17 @@ export default class Sort {
   async run() {
     // Init visual.
     this.setSorting(true);
-    this.visual.setComparingIndexes(false);
-    this.visual.setSwappingIndexes(false);
-    this.visual.setSortedIndexes(false);
+    this.visual.resetIndexes();
 
     // Do sorting.
     await this.doRun();
 
     // Complete visual.
-    this.visual.setComparingIndexes(false);
-    this.visual.setSwappingIndexes(false);
-    this.visual.setSortedIndexes(this.visual.getSeries().map(function (_, i) {
+    this.visual.resetIndexes();
+    this.visual.setIndexes([new CompletedIndex(this.visual.getSeries().map(function (_, i) {
       return i
-    }));
+    }))])
+
     this.visual.redraw();
     this.setSorting(false);
   }
