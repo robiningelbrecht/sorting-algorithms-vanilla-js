@@ -3,16 +3,23 @@ import Sort from "./Sort.js";
 
 export default class QuickSort extends Sort{
 
-  async run() {
-    this.setSorting(true);
+  getTitle() {
+    return 'Bubble Sort';
+  }
+
+  getLegend(){
+    return '<div class="d-flex justify-content-center">\n' +
+      '        <span class="badge bg-success m-2">Sorted</span>\n' +
+      '        <span class="badge bg-warning m-2">Comparing</span>\n' +
+      '        <span class="badge bg-danger m-2">Swapping</span>\n' +
+      '        <span class="badge bg-info m-2">Pivot</span>\n' +
+      '    </div>';
+  }
+
+  async doRun() {
     let series = this.visual.series;
 
     await this.doSort(series, 0, series.length - 1);
-
-    this.setSorting(false);
-    this.visual.setActiveIndexes(false);
-    this.visual.setBoundryIndexes(false);
-    this.visual.draw();
   }
 
   async doSort(arr, left, right) {
@@ -20,7 +27,6 @@ export default class QuickSort extends Sort{
       return arr;
     }
 
-    this.visual.setBoundryIndexes([left, right]);
     let index = await this.partition(arr, left, right);
     if (left < (index - 1)) {
       await this.doSort(arr, left, (index - 1));
@@ -34,6 +40,11 @@ export default class QuickSort extends Sort{
     let pivot = arr[Math.floor((right + left) / 2)],
       i = left,
       j = right;
+
+    this.visual.setSortedIndexes([Math.floor((right + left) / 2)]);
+    this.visual.redraw();
+    await Utils.sleep(this.speed);
+
     while (i <= j) {
       while (arr[i] < pivot) {
         i++
@@ -41,6 +52,9 @@ export default class QuickSort extends Sort{
       while (arr[j] > pivot) {
         j--;
       }
+      this.visual.setComparingIndexes([i, j]);
+      this.visual.redraw();
+      await Utils.sleep(this.speed);
       if (i <= j) {
         await this.swap(arr, i, j);
         i++;
@@ -51,17 +65,13 @@ export default class QuickSort extends Sort{
   }
 
   async swap(array, first, second) {
-    this.visual.setActiveIndexes([first, second]);
-    this.visual.draw();
-    await Utils.sleep(this.speed / 2);
-
     let temp = array[first];
     array[first] = array[second];
     array[second] = temp;
 
-    this.visual.setSeries(array);
-    this.visual.draw();
-    await Utils.sleep(this.speed / 2);
+    this.visual.setSwappingIndexes([first, second]);
+    this.visual.redraw();
+    await Utils.sleep(this.speed);
   }
 
 }

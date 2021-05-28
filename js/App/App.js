@@ -9,20 +9,14 @@ export default class App {
     this.sort = null;
   }
 
-  setTitle(title) {
-    document.querySelector("div.card-header").innerHTML = title;
-  }
-
   updateAlgorithm(algorithm) {
     if (this.sort && this.sort.isSorting()) {
       return;
     }
 
     if (algorithm === 'bubble-sort') {
-      this.setTitle('Bubble sort')
       this.sort = new BubbleSort(this.visual, this.speed);
     } else if (algorithm === 'quick-sort') {
-      this.setTitle('Quicksort')
       this.sort = new QuickSort(this.visual, this.speed);
     }
 
@@ -51,7 +45,7 @@ export default class App {
     }
 
     this.visual.setSeries(Utils.getRandomSeries(this.visual.series.length));
-    this.visual.draw();
+    this.visual.draw(this.sort.getLegend());
   }
 
   updateSortingSpeed(speed) {

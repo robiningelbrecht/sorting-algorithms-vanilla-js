@@ -9,8 +9,11 @@ export default class Visual {
     this.sortedIndexes = false
   }
 
-  draw() {
-    this.parent_el.innerHTML = this._getSeriesContainer().innerHTML;
+  draw(legend) {
+    let legend_element = document.createElement('div');
+    legend_element.innerHTML = legend;
+
+    this.parent_el.innerHTML = this._getSeriesContainer().outerHTML + legend_element.innerHTML;
   }
 
   redraw() {
@@ -90,6 +93,7 @@ export default class Visual {
       col.appendChild(progress);
 
       container.appendChild(col)
+      container.classList.add(...['row' ,'flex-nowrap'])
     });
 
     return container;

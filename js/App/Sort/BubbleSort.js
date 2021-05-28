@@ -3,9 +3,19 @@ import Sort from "./Sort.js";
 
 export default class BubbleSort extends Sort {
 
-  async run() {
-    this.setSorting(true);
+  getTitle() {
+    return 'Bubble Sort';
+  }
 
+  getLegend(){
+    return '<div class="d-flex justify-content-center">\n' +
+      '        <span class="badge bg-success m-2">Sorted</span>\n' +
+      '        <span class="badge bg-warning m-2">Comparing</span>\n' +
+      '        <span class="badge bg-danger m-2">Swapping</span>\n' +
+      '    </div>';
+  }
+
+  async doRun() {
     let series = this.visual.getSeries();
     let len = series.length;
 
@@ -38,17 +48,11 @@ export default class BubbleSort extends Sort {
 
       count_sorted++
       let sorted = [];
-      for(let j = 1; j <= count_sorted; j++){
+      for (let j = 1; j <= count_sorted; j++) {
         sorted.push(len - j);
       }
       this.visual.setSortedIndexes(sorted);
     } while (swapped);
-
-    this.visual.setComparingIndexes(false);
-    this.visual.setSwappingIndexes(false);
-    this.visual.setSortedIndexes(this.visual.getSeries().map(function(_, i) { return i }));
-    this.visual.redraw();
-    this.setSorting(false);
   }
 
 }

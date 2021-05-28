@@ -15,6 +15,7 @@ let app = new App(visual, speed);
 let algorithm_select = document.querySelector("select.algorithm");
 algorithm_select.addEventListener('change', (e) => {
   app.updateAlgorithm(e.target.value);
+  document.querySelector("div.card-header").innerHTML = app.sort.getTitle();
 });
 
 // Add event listener to update sorting speed.

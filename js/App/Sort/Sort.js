@@ -24,4 +24,29 @@ export default class Sort {
     this.isRunning = flag;
   }
 
+  async run() {
+    // Init visual.
+    this.setSorting(true);
+    this.visual.setComparingIndexes(false);
+    this.visual.setSwappingIndexes(false);
+    this.visual.setSortedIndexes(false);
+
+    // Do sorting.
+    await this.doRun();
+
+    // Complete visual.
+    this.visual.setComparingIndexes(false);
+    this.visual.setSwappingIndexes(false);
+    this.visual.setSortedIndexes(this.visual.getSeries().map(function (_, i) {
+      return i
+    }));
+    this.visual.redraw();
+    this.setSorting(false);
+  }
+
+  async doRun() {
+    // Child class should implement this.
+  }
+
+
 }
