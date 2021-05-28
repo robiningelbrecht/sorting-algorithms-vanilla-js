@@ -1,0 +1,21 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#visualize .col{
+    padding: 0 3px;
+}
+
+.progress.progress-vertical {
+    background-color: transparent;
+    min-height: 400px;
+    align-items: flex-end;
+    border-radius: 0;
+}
+
+.progress.progress-vertical .progress-bar {
+    border-radius: .25rem .25rem 0 0;
+    width: 100%;
+    justify-content: flex-end;
+    transition: height .6s ease;
+}
