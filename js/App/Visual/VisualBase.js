@@ -15,11 +15,7 @@ export default class VisualBase {
     this.parent_el.innerHTML = this._getSeriesContainer().outerHTML + this._getLegendContainer().outerHTML + explanation_container.outerHTML;
   }
 
-  async redraw() {
-    if (!this.series) {
-      return;
-    }
-
+  async redrawMeta(){
     this.parent_el.querySelector('div.legend').innerHTML = this._getLegendContainer().innerHTML;
     let explanation_container = await this._getExplanationContainer();
     this.parent_el.querySelector('div.explanation').innerHTML = explanation_container.innerHTML;

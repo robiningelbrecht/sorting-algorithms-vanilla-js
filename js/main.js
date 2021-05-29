@@ -37,13 +37,18 @@ speed_input.addEventListener('blur', (e) => {
 // Add event listener to randomize data.
 let button_randomize = document.querySelector("button.randomize");
 button_randomize.addEventListener('click', () => {
-  app.randomizeVisual(false);
+  app.randomizeVisual();
 });
 
 // Add event listener to run the selected sorting algorithm.
 let button_run = document.querySelector("button.run");
 button_run.addEventListener('click', () => {
   app.runSort();
+});
+
+let button_sort_stop = document.querySelector("button.sort-stop");
+button_sort_stop.addEventListener('click', () => {
+  window.location.reload(true);
 });
 
 // Add event listeners to enable / disable input.
@@ -55,18 +60,18 @@ body.addEventListener('SortingStarted', () => {
     dependee.setAttribute('disabled', 'disabled');
   });
 
-  button_run.querySelector('span.icon').classList.add('d-none');
-  button_run.querySelector('span.icon').classList.remove('d-inline-block');
-  button_run.querySelector('span.spinner').classList.add('d-inline-block')
-  button_run.querySelector('span.spinner').classList.remove('d-none');
+  button_run.classList.add('d-none');
+  button_run.classList.remove('d-inline-block');
+  button_sort_stop.classList.add('d-inline-block')
+  button_sort_stop.classList.remove('d-none');
 });
 body.addEventListener('SortingCompleted', () => {
   dependees.forEach((dependee) => {
     dependee.removeAttribute('disabled');
   });
 
-  button_run.querySelector('span.icon').classList.add('d-inline-none');
-  button_run.querySelector('span.icon').classList.remove('d-none');
-  button_run.querySelector('span.spinner').classList.add('d-none')
-  button_run.querySelector('span.spinner').classList.remove('d-inline-block');
+  button_run.classList.add('d-inline-none');
+  button_run.classList.remove('d-none');
+  button_sort_stop.classList.add('d-none')
+  button_sort_stop.classList.remove('d-inline-block');
 });

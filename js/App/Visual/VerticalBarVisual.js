@@ -2,9 +2,7 @@ import VisualBase from "./VisualBase.js";
 
 export default class VerticalBarVisual extends VisualBase {
 
-  async redraw() {
-    await super.redraw();
-
+  redraw() {
     let progress_bars = this.parent_el.querySelectorAll('.progress-vertical .progress-bar');
     this.series.forEach((value, index) => {
       // Update height.

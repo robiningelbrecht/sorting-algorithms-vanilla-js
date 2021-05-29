@@ -13,7 +13,7 @@ export default class App {
 
     this.sort = sort;
 
-    this.randomizeVisual(false);
+    this.randomizeVisual();
   }
 
   updateVisual(visual) {
@@ -24,7 +24,7 @@ export default class App {
     this.visual = visual;
     this.sort.setVisual(visual);
 
-    this.randomizeVisual();
+    this.randomizeVisual(true);
   }
 
   runSort() {
@@ -35,7 +35,7 @@ export default class App {
     this.sort.run();
   }
 
-  randomizeVisual(draw = true) {
+  randomizeVisual(complete_redraw = false) {
     if (this.sort.isSorting()) {
       return;
     }
@@ -45,20 +45,20 @@ export default class App {
     this.visual.setSeries(Utils.getRandomSeries(this.visual.series.length));
     this.visual.resetIndexes();
 
-    if (draw) {
-      // Force complete redraw.
-      this.visual.draw();
-      return;
-    }
-
     if (!this.visual.parent_el.querySelectorAll('.progress-vertical .progress-bar').length) {
       // Visual is not drawn yet.
       this.visual.draw();
       return;
     }
 
+    if (complete_redraw) {
+      this.visual.draw();
+      return;
+    }
+
     // Redraw visual.
     this.visual.redraw();
+    this.visual.redrawMeta();
   }
 
   updateSortingSpeed(speed) {

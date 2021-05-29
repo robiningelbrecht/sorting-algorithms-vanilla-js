@@ -2,9 +2,8 @@ import VerticalBarVisual from "./VerticalBarVisual.js";
 
 export default class CircleVisual extends VerticalBarVisual {
 
-  async redraw() {
-    await super.redraw();
-
+  redraw() {
+    super.redraw();
     let progress_bars = this.parent_el.querySelectorAll('.progress-vertical .progress-bar');
 
     this.series.forEach((value, index) => {
