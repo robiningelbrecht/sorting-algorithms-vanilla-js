@@ -12,6 +12,13 @@ export default class VisualBase {
     this.parent_el.innerHTML = this._getSeriesContainer().outerHTML + this._getLegendContainer().outerHTML;
   }
 
+  redraw() {
+    if (!this.series) {
+      return;
+    }
+    this.parent_el.querySelector('div.legend').innerHTML = this._getLegendContainer().innerHTML;
+  }
+
   getSeries() {
     return this.series
   }
@@ -40,7 +47,7 @@ export default class VisualBase {
 
   _getLegendContainer() {
     let container = document.createElement('div');
-    container.classList.add(...['d-flex', 'justify-content-center']);
+    container.classList.add(...['legend', 'd-flex', 'justify-content-center']);
 
     this.availableIndexTypes.forEach((Index) => {
       let item = document.createElement('span');

@@ -11,6 +11,6 @@ export default class SortedIndex extends IndexBase{
   }
 
   getWeight() {
-    return 2;
+    return 30;
   }
 }

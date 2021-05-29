@@ -11,6 +11,6 @@ export default class ComparingIndex extends IndexBase{
   }
 
   getWeight() {
-    return 0;
+    return 10;
   }
 }

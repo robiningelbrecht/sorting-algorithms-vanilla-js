@@ -5,7 +5,13 @@ import ComparingIndex from "../Index/ComparingIndex.js";
 import SwappingIndex from "../Index/SwappingIndex.js";
 import PivotIndex from "../Index/PivotIndex.js";
 
-export default class QuickSort extends SortBase{
+export default class QuickSort extends SortBase {
+
+  constructor(visual, speed) {
+    super(visual, speed)
+
+    this.sorted_elements = [];
+  }
 
   getTitle() {
     return 'Quick Sort';
@@ -26,54 +32,63 @@ export default class QuickSort extends SortBase{
     await this.doSort(series, 0, series.length - 1);
   }
 
-  async doSort(arr, left, right) {
-    if (arr.length <= 1) {
-      return arr;
-    }
+  async doSort(arr, left = 0, right = arr.length - 1) {
+    if (left >= right) return;
 
-    let index = await this.partition(arr, left, right);
-    if (left < (index - 1)) {
-      await this.doSort(arr, left, (index - 1));
-    }
-    if (index < right) {
-      await this.doSort(arr, index, right);
-    }
-  }
+    let pivot_index = Math.floor((left + right) / 2);
+    let pivot = arr[pivot_index];
 
-  async partition(arr, left, right) {
-    let pivot = arr[Math.floor((right + left) / 2)],
-      i = left,
-      j = right;
-
-    while (i <= j) {
-      while (arr[i] < pivot) {
-        i++
-      }
-      while (arr[j] > pivot) {
-        j--;
-      }
-
-      this.visual.setIndexes([new ComparingIndex([i, j])])
-      this.visual.redraw();
-      await Utils.sleep(this.speed);
-
-      if (i <= j) {
-        await this.swap(arr, i, j);
-        i++;
-        j--;
-      }
-    }
-    return i;
-  }
-
-  async swap(array, first, second) {
-    let temp = array[first];
-    array[first] = array[second];
-    array[second] = temp;
-
-    this.visual.setIndexes([new SwappingIndex([first, second]), new ComparingIndex([])])
+    this.visual.setIndexes([new PivotIndex([pivot_index])])
     this.visual.redraw();
     await Utils.sleep(this.speed);
+
+    let index = await this.partition(arr, left, right, pivot);
+    await this.doSort(arr, left, index - 1);
+    await this.doSort(arr, index, right);
+
+    this.sorted_elements.push(pivot_index);
+    this.visual.setIndexes([new SortedIndex(this.sorted_elements)]);
+    this.visual.redraw();
+    await Utils.sleep(this.speed);
+
+    return arr;
+  }
+
+  async partition(arr, left, right, pivot) {
+    while (left <= right) {
+      while (arr[left] < pivot && left <= right) {
+        left++;
+        this.visual.setIndexes([new ComparingIndex([left])])
+        this.visual.redraw();
+        await Utils.sleep(this.speed);
+      }
+      while (arr[right] > pivot) {
+        this.visual.setIndexes([new ComparingIndex([left, right])])
+        this.visual.redraw();
+        await Utils.sleep(this.speed);
+        right--;
+      }
+      if (left <= right) {
+        this.visual.setIndexes([new ComparingIndex([left, right])])
+        this.visual.redraw();
+        await Utils.sleep(this.speed);
+
+        this.visual.setIndexes([new SwappingIndex([left, right]), new ComparingIndex([])]);
+        this.visual.redraw();
+        await Utils.sleep(this.speed);
+
+        [arr[left], arr[right]] = [arr[right], arr[left]];
+
+        this.visual.setIndexes([new SwappingIndex([left, right]), new ComparingIndex([])]);
+        this.visual.redraw();
+        await Utils.sleep(this.speed);
+
+        left++;
+        right--;
+        this.visual.setIndexes([new SwappingIndex([])]);
+      }
+    }
+    return left;
   }
 
 }

@@ -11,6 +11,6 @@ export default class PivotIndex extends IndexBase{
   }
 
   getWeight() {
-    return 4;
+    return 1;
   }
 }

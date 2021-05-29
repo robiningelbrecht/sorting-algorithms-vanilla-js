@@ -11,6 +11,6 @@ export default class SwappingIndex extends IndexBase{
   }
 
   getWeight() {
-    return 1;
+    return 20;
   }
 }
