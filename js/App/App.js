@@ -40,6 +40,7 @@ export default class App {
       return;
     }
 
+    this.visual.setExplanationTemplate(this.sort.constructor.name);
     this.visual.setAvailableIndexTypes(this.sort.getAvailableIndexTypes());
     this.visual.setSeries(Utils.getRandomSeries(this.visual.series.length));
     this.visual.resetIndexes();

@@ -5,18 +5,24 @@ export default class VisualBase {
     this.series = series;
     this.indexes = false;
     this.availableIndexTypes = [];
+    this.explanationTemplate = null;
   }
 
-  draw() {
+  async draw() {
     this.parent_el.className = this.constructor.name;
-    this.parent_el.innerHTML = this._getSeriesContainer().outerHTML + this._getLegendContainer().outerHTML;
+
+    let explanation_container = await this._getExplanationContainer();
+    this.parent_el.innerHTML = this._getSeriesContainer().outerHTML + this._getLegendContainer().outerHTML + explanation_container.outerHTML;
   }
 
-  redraw() {
+  async redraw() {
     if (!this.series) {
       return;
     }
+
     this.parent_el.querySelector('div.legend').innerHTML = this._getLegendContainer().innerHTML;
+    let explanation_container = await this._getExplanationContainer();
+    this.parent_el.querySelector('div.explanation').innerHTML = explanation_container.innerHTML;
   }
 
   getSeries() {
@@ -33,6 +39,10 @@ export default class VisualBase {
 
   setAvailableIndexTypes(index_types) {
     this.availableIndexTypes = index_types;
+  }
+
+  setExplanationTemplate(name) {
+    this.explanationTemplate = name;
   }
 
   setIndexes(indexes) {
@@ -56,6 +66,16 @@ export default class VisualBase {
 
       container.appendChild(item);
     });
+
+    return container;
+  }
+
+  async _getExplanationContainer() {
+    let res = await fetch('/templates/' + this.explanationTemplate + '.html');
+
+    let container = document.createElement('div');
+    container.classList.add(...['explanation', 'd-flex', 'justify-content-center']);
+    container.innerHTML = await res.text();
 
     return container;
   }
