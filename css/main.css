@@ -2,27 +2,28 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-#visualize.VerticalBarVisual .col{
+#visualize.VerticalBarVisual .col,
+#visualize.InvertedVerticalBarVisual .col {
     padding: 0 3px;
 }
 
-#visualize.HorizontalBarVisual .col{
-    padding: 3px 0;
-}
-
 .progress.progress-horizontal,
-.progress.progress-vertical{
+.progress.progress-vertical {
     background-color: transparent;
     border-radius: 0;
 }
 
-.progress.progress-horizontal{
+.progress.progress-horizontal {
     height: 30px;
 }
 
 .progress.progress-vertical {
     min-height: 400px;
     align-items: flex-end;
+}
+
+.InvertedVerticalBarVisual .progress.progress-vertical {
+    align-items: flex-start;
 }
 
 .progress.progress-horizontal .progress-bar {
@@ -36,4 +37,8 @@ body {
     width: 100%;
     justify-content: flex-end;
     transition: height .6s ease;
+}
+
+.InvertedVerticalBarVisual .progress.progress-vertical .progress-bar {
+    justify-content: flex-start;
 }

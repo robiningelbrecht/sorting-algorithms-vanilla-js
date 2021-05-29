@@ -4,15 +4,19 @@ export default class SwappingIndex {
     this.list = list;
   }
 
-  getType(){
+  getLabel() {
+    return 'Swapping';
+  }
+
+  getType() {
     return 'bg-danger';
   }
 
-  getList(){
+  getList() {
     return this.list;
   }
 
-  getWeight(){
+  getWeight() {
     return 1;
   }
 }

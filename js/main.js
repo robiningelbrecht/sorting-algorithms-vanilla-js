@@ -1,44 +1,33 @@
-import Utils from './App/Utils.js'
 import App from "./App/App.js";
-import VerticalBarVisual from "./App/Visual/VerticalBarVisual.js";
-import HorizontalBarVisual from "./App/Visual/HorizontalBarVisual.js";
+import VisualFactory from "./App/Factory/VisualFactory.js";
+import SortFactory from "./App/Factory/SortFactory.js";
 
 let root = document.getElementById('visualize');
 
 // Init the visual and the app.
 let app = new App(
-  new VerticalBarVisual(
-    root,
-    Utils.getRandomSeries(20)
-  ),
+  VisualFactory.create('vertical-bars', root, 30),
   document.querySelector("input.speed").value
 );
 
 // Add event listener to update algorithm.
 let algorithm_select = document.querySelector("select.algorithm");
 algorithm_select.addEventListener('change', (e) => {
-  app.updateAlgorithm(e.target.value);
+  app.updateAlgorithm(SortFactory.create(e.target.value, app.visual, app.speed));
   document.querySelector("div.card-header").innerHTML = app.sort.getTitle();
 });
 
 // Add event listener to update visual.
 let visual_select = document.querySelector("select.visual");
 visual_select.addEventListener('change', (e) => {
-  if (e.target.value === 'vertical-bars') {
-    app.updateVisual(new VerticalBarVisual(
-      root,
-      Utils.getRandomSeries(30)
-    ));
-  } else if (e.target.value === 'horizontal-bars') {
-    app.updateVisual(new HorizontalBarVisual(
-      root,
-      Utils.getRandomSeries(30)
-    ));
-  }
+  let visual = VisualFactory.create(e.target.value, root, 30);
+  visual.setAvailableIndexTypes(app.sort.getAvailableIndexTypes());
+  app.updateVisual(visual);
 });
 
 // Add event listener to update sorting speed.
-document.querySelector("input.speed").addEventListener('blur', (e) => {
+let speed_input = document.querySelector("input.speed");
+speed_input.addEventListener('blur', (e) => {
   app.updateSortingSpeed(e.target.value);
 });
 
@@ -56,15 +45,15 @@ button_run.addEventListener('click', () => {
 
 // Add event listeners to enable / disable input.
 let body = document.querySelector("body");
+let dependees = [algorithm_select, visual_select, button_randomize, button_run];
+
 body.addEventListener('SortingStarted', () => {
-  algorithm_select.setAttribute('disabled', 'disabled');
-  visual_select.setAttribute('disabled', 'disabled');
-  button_randomize.setAttribute('disabled', 'disabled');
-  button_run.setAttribute('disabled', 'disabled');
+  dependees.forEach((dependee) => {
+    dependee.setAttribute('disabled', 'disabled');
+  })
 });
 body.addEventListener('SortingCompleted', () => {
-  algorithm_select.removeAttribute('disabled');
-  visual_select.removeAttribute('disabled');
-  button_randomize.removeAttribute('disabled');
-  button_run.removeAttribute('disabled');
+  dependees.forEach((dependee) => {
+    dependee.removeAttribute('disabled');
+  })
 });

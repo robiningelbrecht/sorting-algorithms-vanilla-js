@@ -4,15 +4,19 @@ export default class ComparingIndex {
     this.list = list;
   }
 
-  getType(){
+  getLabel() {
+    return 'Comparing';
+  }
+
+  getType() {
     return 'bg-warning';
   }
 
-  getList(){
+  getList() {
     return this.list;
   }
 
-  getWeight(){
+  getWeight() {
     return 0;
   }
 }

@@ -1,5 +1,3 @@
-import BubbleSort from "./Sort/BubbleSort.js";
-import QuickSort from "./Sort/QuickSort.js";
 import Utils from "./Utils.js";
 
 export default class App {
@@ -14,18 +12,21 @@ export default class App {
       return;
     }
 
-    if (algorithm === 'bubble-sort') {
-      this.sort = new BubbleSort(this.visual, this.speed);
-    } else if (algorithm === 'quick-sort') {
-      this.sort = new QuickSort(this.visual, this.speed);
-    }
+    this.sort = algorithm;
 
     this.randomizeVisual();
   }
 
-  updateVisual(visual){
+  updateVisual(visual) {
+    if (this.sort && this.sort.isSorting()) {
+      return;
+    }
+
     this.visual = visual;
-    this.sort.setVisual(visual);
+
+    if (this.sort) {
+      this.sort.setVisual(visual);
+    }
 
     this.randomizeVisual();
   }
@@ -51,9 +52,10 @@ export default class App {
       return;
     }
 
+    this.visual.setAvailableIndexTypes(this.sort.getAvailableIndexTypes());
     this.visual.setSeries(Utils.getRandomSeries(this.visual.series.length));
     this.visual.resetIndexes();
-    this.visual.draw(this.sort.getLegend());
+    this.visual.draw();
   }
 
   updateSortingSpeed(speed) {

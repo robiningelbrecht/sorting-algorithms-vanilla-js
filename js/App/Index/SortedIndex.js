@@ -4,15 +4,19 @@ export default class SortedIndex {
     this.list = list;
   }
 
-  getType(){
+  getLabel() {
+    return 'Sorted';
+  }
+
+  getType() {
     return 'bg-success';
   }
 
-  getList(){
+  getList() {
     return this.list;
   }
 
-  getWeight(){
+  getWeight() {
     return 2;
   }
 }

@@ -1,18 +1,6 @@
 import Visual from "./Visual.js";
-import SortedIndex from "../Index/CompletedIndex.js";
-import SwappingIndex from "../Index/SwappingIndex.js";
-import ComparingIndex from "../Index/ComparingIndex.js";
 
 export default class VerticalBarVisual extends Visual {
-
-  constructor(parent_element, series) {
-    super(parent_element, series);
-    this.availableIndexTypes = [
-      new SortedIndex([]),
-      new SwappingIndex([]),
-      new ComparingIndex([])
-    ];
-  }
 
   redraw() {
     if (!this.series) {

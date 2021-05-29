@@ -2,7 +2,7 @@ import Utils from '../Utils.js'
 import Sort from "./Sort.js";
 import ComparingIndex from "../Index/ComparingIndex.js";
 import SwappingIndex from "../Index/SwappingIndex.js";
-import SortedIndex from "../Index/CompletedIndex.js";
+import SortedIndex from "../Index/SortedIndex.js";
 
 export default class BubbleSort extends Sort {
 
@@ -10,12 +10,12 @@ export default class BubbleSort extends Sort {
     return 'Bubble Sort';
   }
 
-  getLegend(){
-    return '<div class="d-flex justify-content-center">\n' +
-      '        <span class="badge bg-success m-2">Sorted</span>\n' +
-      '        <span class="badge bg-warning m-2">Comparing</span>\n' +
-      '        <span class="badge bg-danger m-2">Swapping</span>\n' +
-      '    </div>';
+  getAvailableIndexTypes() {
+    return [
+      new SortedIndex([]),
+      new ComparingIndex([]),
+      new SwappingIndex([]),
+    ];
   }
 
   async doRun() {
@@ -47,13 +47,10 @@ export default class BubbleSort extends Sort {
         }
       }
 
-      count_sorted++
-      let sorted = [];
-      for (let j = 1; j <= count_sorted; j++) {
-        sorted.push(len - j);
-      }
+      let range = Utils.range(len - 1 - count_sorted, len - 1, 1);
+      this.visual.setIndexes([new SortedIndex(range)]);
 
-      this.visual.setIndexes([new SortedIndex(sorted)]);
+      count_sorted++
     } while (swapped);
   }
 

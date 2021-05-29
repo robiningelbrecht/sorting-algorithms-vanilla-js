@@ -1,4 +1,5 @@
-import SortedIndex from "../Index/CompletedIndex.js";
+import SortedIndex from "../Index/SortedIndex.js";
+import Utils from "../Utils.js";
 
 export default class Sort {
 
@@ -40,10 +41,7 @@ export default class Sort {
 
     // Complete visual.
     this.visual.resetIndexes();
-    this.visual.setIndexes([new SortedIndex(this.visual.getSeries().map(function (_, i) {
-      return i
-    }))])
-
+    this.visual.setIndexes([new SortedIndex(Utils.range(0, this.visual.getSeries().length - 1, 1))]);
     this.visual.redraw();
     this.setSorting(false);
   }
