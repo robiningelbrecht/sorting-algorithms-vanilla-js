@@ -6,12 +6,6 @@ import SortedIndex from "../Index/SortedIndex.js";
 
 export default class SelectionSort extends SortBase {
 
-  constructor(visual, speed) {
-    super(visual, speed)
-
-    this.sorted_elements = [];
-  }
-
   getTitle() {
     return 'Selection Sort';
   }
@@ -25,6 +19,7 @@ export default class SelectionSort extends SortBase {
   }
 
   async doRun() {
+    this.sorted_elements = [];
     let series = this.visual.getSeries();
     let n = series.length;
 

@@ -9,8 +9,6 @@ export default class QuickSort extends SortBase {
 
   constructor(visual, speed) {
     super(visual, speed)
-
-    this.sorted_elements = [];
   }
 
   getTitle() {
@@ -27,6 +25,7 @@ export default class QuickSort extends SortBase {
   }
 
   async doRun() {
+    this.sorted_elements = [];
     let series = this.visual.series;
 
     await this.doSort(series, 0, series.length - 1);
