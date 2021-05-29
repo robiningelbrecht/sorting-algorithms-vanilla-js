@@ -1,4 +1,4 @@
-export default class Visual {
+export default class VisualBase {
 
   constructor(parent_element, series) {
     this.parent_el = parent_element;

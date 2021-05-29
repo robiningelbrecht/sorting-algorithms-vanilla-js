@@ -1,10 +1,10 @@
 import Utils from '../Utils.js'
-import Sort from "./Sort.js";
+import SortBase from "./SortBase.js";
 import ComparingIndex from "../Index/ComparingIndex.js";
 import SwappingIndex from "../Index/SwappingIndex.js";
 import SortedIndex from "../Index/SortedIndex.js";
 
-export default class BubbleSort extends Sort {
+export default class BubbleSort extends SortBase {
 
   getTitle() {
     return 'Bubble Sort';

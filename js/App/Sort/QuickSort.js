@@ -1,19 +1,23 @@
 import Utils from '../Utils.js'
-import Sort from "./Sort.js";
+import SortBase from "./SortBase.js";
+import SortedIndex from "../Index/SortedIndex.js";
+import ComparingIndex from "../Index/ComparingIndex.js";
+import SwappingIndex from "../Index/SwappingIndex.js";
+import PivotIndex from "../Index/PivotIndex.js";
 
-export default class QuickSort extends Sort{
+export default class QuickSort extends SortBase{
 
   getTitle() {
-    return 'Bubble Sort';
+    return 'Quick Sort';
   }
 
-  getLegend(){
-    return '<div class="d-flex justify-content-center">\n' +
-      '        <span class="badge bg-success m-2">Sorted</span>\n' +
-      '        <span class="badge bg-warning m-2">Comparing</span>\n' +
-      '        <span class="badge bg-danger m-2">Swapping</span>\n' +
-      '        <span class="badge bg-info m-2">Pivot</span>\n' +
-      '    </div>';
+  getAvailableIndexTypes() {
+    return [
+      new SortedIndex([]),
+      new ComparingIndex([]),
+      new SwappingIndex([]),
+      new PivotIndex([]),
+    ];
   }
 
   async doRun() {
@@ -41,10 +45,6 @@ export default class QuickSort extends Sort{
       i = left,
       j = right;
 
-    this.visual.setSortedIndexes([Math.floor((right + left) / 2)]);
-    this.visual.redraw();
-    await Utils.sleep(this.speed);
-
     while (i <= j) {
       while (arr[i] < pivot) {
         i++
@@ -52,9 +52,11 @@ export default class QuickSort extends Sort{
       while (arr[j] > pivot) {
         j--;
       }
-      this.visual.setComparingIndexes([i, j]);
+
+      this.visual.setIndexes([new ComparingIndex([i, j])])
       this.visual.redraw();
       await Utils.sleep(this.speed);
+
       if (i <= j) {
         await this.swap(arr, i, j);
         i++;
@@ -69,7 +71,7 @@ export default class QuickSort extends Sort{
     array[first] = array[second];
     array[second] = temp;
 
-    this.visual.setSwappingIndexes([first, second]);
+    this.visual.setIndexes([new SwappingIndex([first, second]), new ComparingIndex([])])
     this.visual.redraw();
     await Utils.sleep(this.speed);
   }

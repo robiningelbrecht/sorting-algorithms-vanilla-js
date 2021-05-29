@@ -1,8 +1,6 @@
-export default class ComparingIndex {
+import IndexBase from "./IndexBase.js";
 
-  constructor(list) {
-    this.list = list;
-  }
+export default class ComparingIndex extends IndexBase{
 
   getLabel() {
     return 'Comparing';
@@ -10,10 +8,6 @@ export default class ComparingIndex {
 
   getType() {
     return 'bg-warning';
-  }
-
-  getList() {
-    return this.list;
   }
 
   getWeight() {

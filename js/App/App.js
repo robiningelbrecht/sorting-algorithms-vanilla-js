@@ -1,41 +1,33 @@
 import Utils from "./Utils.js";
 
 export default class App {
-  constructor(visual, speed) {
-    this.visual = visual;
-    this.speed = speed;
-    this.sort = null;
+  constructor(sort) {
+    this.sort = sort;
+    this.visual = this.sort.visual;
   }
 
-  updateAlgorithm(algorithm) {
-    if (this.sort && this.sort.isSorting()) {
+  updateSort(sort) {
+    if (this.sort.isSorting()) {
       return;
     }
 
-    this.sort = algorithm;
+    this.sort = sort;
 
-    this.randomizeVisual();
+    this.randomizeVisual(false);
   }
 
   updateVisual(visual) {
-    if (this.sort && this.sort.isSorting()) {
+    if (this.sort.isSorting()) {
       return;
     }
 
     this.visual = visual;
-
-    if (this.sort) {
-      this.sort.setVisual(visual);
-    }
+    this.sort.setVisual(visual);
 
     this.randomizeVisual();
   }
 
   runSort() {
-    if (!this.sort) {
-      return;
-    }
-
     if (this.sort.isSorting()) {
       return;
     }
@@ -43,27 +35,32 @@ export default class App {
     this.sort.run();
   }
 
-  randomizeVisual() {
-    if (!this.sort) {
-      return;
-    }
-
-    if (this.sort && this.sort.isSorting()) {
+  randomizeVisual(draw = true) {
+    if (this.sort.isSorting()) {
       return;
     }
 
     this.visual.setAvailableIndexTypes(this.sort.getAvailableIndexTypes());
     this.visual.setSeries(Utils.getRandomSeries(this.visual.series.length));
     this.visual.resetIndexes();
-    this.visual.draw();
+
+    if (draw) {
+      // Force complete redraw.
+      this.visual.draw();
+      return;
+    }
+
+    if (!this.visual.parent_el.querySelectorAll('.progress-vertical .progress-bar').length) {
+      // Visual is not drawn yet.
+      this.visual.draw();
+      return;
+    }
+
+    // Redraw visual.
+    this.visual.redraw();
   }
 
   updateSortingSpeed(speed) {
-    this.speed = speed;
-
-    if (!this.sort) {
-      return;
-    }
     this.sort.setSpeed(speed);
   }
 }

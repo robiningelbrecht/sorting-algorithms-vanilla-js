@@ -1,6 +1,6 @@
-import Visual from "./Visual.js";
+import VisualBase from "./VisualBase.js";
 
-export default class VerticalBarVisual extends Visual {
+export default class VerticalBarVisual extends VisualBase {
 
   redraw() {
     if (!this.series) {

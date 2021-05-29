@@ -1,7 +1,7 @@
 import SortedIndex from "../Index/SortedIndex.js";
 import Utils from "../Utils.js";
 
-export default class Sort {
+export default class SortBase {
 
   constructor(visual, speed) {
     this.visual = visual;

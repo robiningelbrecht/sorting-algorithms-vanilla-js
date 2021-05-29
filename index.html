@@ -25,8 +25,7 @@
                 <div class="col-md">
                     <div class="form-floating">
                         <select class="form-select algorithm">
-                            <option value="" selected>Choose</option>
-                            <option value="bubble-sort">Bubble Sort</option>
+                            <option value="bubble-sort" selected>Bubble Sort</option>
                             <option value="quick-sort">Quick Sort</option>
                         </select>
                         <label>Algorithm</label>
@@ -43,14 +42,16 @@
                         <select class="form-select visual">
                             <option value="vertical-bars" selected>Vertical bars</option>
                             <option value="inverted-vertical-bars">Inverted vertical bars</option>
+                            <option value="circles">Circles</option>
                         </select>
                         <label>Visual</label>
                     </div>
                 </div>
                 <div class="col-md d-flex">
                     <button type="button" class="btn btn-success run me-2">
-                        <i class="bi bi-play-circle"></i>
-                        Run
+                        <span class="icon"><i class="bi bi-play-circle"></i></span>
+                        <span class="spinner spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Sort
                     </button>
                     <button type="button" class="btn btn-primary randomize">
                         <i class="bi bi-shuffle"></i>
@@ -65,7 +66,7 @@
 <div class="container-fluid mt-2">
     <div class="card">
         <div class="card-header">
-            Choose a sorting algorithm...
+            Bubble Sort
         </div>
         <div class="card-body">
             <div id="visualize"></div>

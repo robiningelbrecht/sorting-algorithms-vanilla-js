@@ -1,8 +1,6 @@
-export default class SortedIndex {
+import IndexBase from "./IndexBase.js";
 
-  constructor(list) {
-    this.list = list;
-  }
+export default class SortedIndex extends IndexBase{
 
   getLabel() {
     return 'Sorted';
@@ -10,10 +8,6 @@ export default class SortedIndex {
 
   getType() {
     return 'bg-success';
-  }
-
-  getList() {
-    return this.list;
   }
 
   getWeight() {

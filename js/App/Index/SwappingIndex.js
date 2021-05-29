@@ -1,8 +1,6 @@
-export default class SwappingIndex {
+import IndexBase from "./IndexBase.js";
 
-  constructor(list) {
-    this.list = list;
-  }
+export default class SwappingIndex extends IndexBase{
 
   getLabel() {
     return 'Swapping';
@@ -10,10 +8,6 @@ export default class SwappingIndex {
 
   getType() {
     return 'bg-danger';
-  }
-
-  getList() {
-    return this.list;
   }
 
   getWeight() {
