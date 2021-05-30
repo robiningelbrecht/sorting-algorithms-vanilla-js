@@ -36,13 +36,13 @@ speed_input.addEventListener('blur', (e) => {
 });
 
 // Add event listener to randomize data.
-let button_randomize = document.querySelector("button.randomize");
+let button_randomize = document.querySelector("button.visual-randomize");
 button_randomize.addEventListener('click', () => {
   app.randomizeVisual();
 });
 
 // Add event listener to run the selected sorting algorithm.
-let button_run = document.querySelector("button.run");
+let button_run = document.querySelector("button.sort-run");
 button_run.addEventListener('click', () => {
   app.runSort();
 });

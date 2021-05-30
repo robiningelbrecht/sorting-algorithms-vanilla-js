@@ -23,9 +23,9 @@ export default class SortBase {
 
   setSorting(flag) {
     if (flag) {
-      document.querySelector('body').dispatchEvent(new CustomEvent('SortingStarted'))
+      document.querySelector('body').dispatchEvent(new CustomEvent('SortingStarted'));
     } else {
-      document.querySelector('body').dispatchEvent(new CustomEvent('SortingCompleted'))
+      document.querySelector('body').dispatchEvent(new CustomEvent('SortingCompleted'));
     }
 
     this.isRunning = flag;
