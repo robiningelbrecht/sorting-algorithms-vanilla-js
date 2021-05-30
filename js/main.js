@@ -10,7 +10,7 @@ let app = App.load(root) || new App(
   SortFactory.create(
     'BubbleSort',
     VisualFactory.create('VerticalBarVisual', root, series_length),
-    2000,
+    200,
   )
 );
 
