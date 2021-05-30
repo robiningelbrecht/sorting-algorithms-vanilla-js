@@ -1,6 +1,11 @@
 import Utils from "./Utils.js";
+import VisualFactory from "./Factory/VisualFactory.js";
+import SortFactory from "./Factory/SortFactory.js";
 
 export default class App {
+
+  static SESSION_STORAGE_KEY = 'vannilla-js-sorting-algorithms';
+
   constructor(sort) {
     this.sort = sort;
     this.visual = this.sort.visual;
@@ -63,5 +68,32 @@ export default class App {
 
   updateSortingSpeed(speed) {
     this.sort.setSpeed(speed);
+  }
+
+  save() {
+    sessionStorage.setItem(App.SESSION_STORAGE_KEY, JSON.stringify({
+      sort: this.sort.constructor.name,
+      visual: this.visual.constructor.name,
+      speed: this.sort.speed,
+      series_length: this.visual.series.length,
+    }));
+  }
+
+  static load(root) {
+    let state = JSON.parse(sessionStorage.getItem(App.SESSION_STORAGE_KEY));
+
+    if (state) {
+      sessionStorage.removeItem(App.SESSION_STORAGE_KEY);
+
+      return new App(
+        SortFactory.create(
+          state.sort,
+          VisualFactory.create(state.visual, root, state.series_length),
+          state.speed
+        )
+      );
+    }
+
+    return null;
   }
 }

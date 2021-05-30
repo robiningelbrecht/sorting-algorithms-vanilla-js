@@ -6,13 +6,14 @@ let root = document.getElementById('visualize');
 let series_length = 30;
 
 // Init the visual and the app.
-let app = new App(
+let app = App.load(root) || new App(
   SortFactory.create(
-    'bubble-sort',
-    VisualFactory.create('vertical-bars', root, series_length),
-    document.querySelector("input.speed").value
+    'BubbleSort',
+    VisualFactory.create('VerticalBarVisual', root, series_length),
+    2000,
   )
 );
+
 app.randomizeVisual();
 
 // Add event listener to update algorithm.
@@ -48,10 +49,16 @@ button_run.addEventListener('click', () => {
 
 let button_sort_stop = document.querySelector("button.sort-stop");
 button_sort_stop.addEventListener('click', () => {
+  app.save();
   window.location.reload(true);
 });
 
-// Add event listeners to enable / disable input.
+// Init input.
+algorithm_select.value = app.sort.constructor.name;
+speed_input.value = app.sort.speed;
+visual_select.value = app.visual.constructor.name;
+
+// Add event listeners to enable / disable input while sorting.
 let body = document.querySelector("body");
 let dependees = [algorithm_select, visual_select, button_randomize, button_run];
 

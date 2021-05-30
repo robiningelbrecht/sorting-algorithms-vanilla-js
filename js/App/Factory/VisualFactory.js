@@ -6,17 +6,17 @@ import CircleVisual from "../Visual/CircleVisual.js";
 export default class VisualFactory {
 
   static create(name, root, series_length) {
-    if (name === 'vertical-bars') {
+    if (name === 'VerticalBarVisual') {
       return new VerticalBarVisual(
         root,
         Utils.getRandomSeries(series_length)
       );
-    } else if (name === 'inverted-vertical-bars') {
+    } else if (name === 'InvertedVerticalBarVisual') {
       return new InvertedVerticalBarVisual(
         root,
         Utils.getRandomSeries(series_length)
       );
-    }else if (name === 'circles') {
+    }else if (name === 'CircleVisual') {
       return new CircleVisual(
         root,
         Utils.getRandomSeries(series_length)
