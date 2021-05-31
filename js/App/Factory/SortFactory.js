@@ -1,9 +1,8 @@
-'use strict';
-
 import BubbleSort from "../Sort/BubbleSort.js";
 import QuickSort from "../Sort/QuickSort.js";
 import SelectionSort from "../Sort/SelectionSort.js";
 import InsertionSort from "../Sort/InsertionSort.js";
+import MergeSort from "../Sort/MergeSort.js";
 
 export default class SortFactory {
 
@@ -14,6 +13,8 @@ export default class SortFactory {
       return new SelectionSort(visual, speed);
     } else if (name === 'InsertionSort') {
       return new InsertionSort(visual, speed);
+    }  else if (name === 'MergeSort') {
+      return new MergeSort(visual, speed);
     } else if (name === 'QuickSort') {
       return new name(visual, speed);
     }
