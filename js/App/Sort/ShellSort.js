@@ -1,3 +1,4 @@
+import Utils from '../Utils.js'
 import SortBase from "./SortBase.js";
 import ComparingIndex from "../Index/ComparingIndex.js";
 import SwappingIndex from "../Index/SwappingIndex.js";
