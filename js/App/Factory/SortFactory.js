@@ -4,6 +4,7 @@ import SelectionSort from "../Sort/SelectionSort.js";
 import InsertionSort from "../Sort/InsertionSort.js";
 import MergeSort from "../Sort/MergeSort.js";
 import HeapSort from "../Sort/HeapSort.js";
+import ShellSort from "../Sort/ShellSort.js";
 
 export default class SortFactory {
 
@@ -20,6 +21,8 @@ export default class SortFactory {
       return new QuickSort(visual, speed);
     } else if (name === 'HeapSort') {
       return new HeapSort(visual, speed);
+    }else if (name === 'ShellSort') {
+      return new ShellSort(visual, speed);
     }
   }
 

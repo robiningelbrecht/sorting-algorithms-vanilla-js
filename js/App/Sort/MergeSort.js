@@ -21,7 +21,6 @@ export default class MergeSort extends SortBase {
     let series = this.visual.getSeries();
 
    this.visual.setSeries(this.doSort(series));
-   this.visual.redraw();
   }
 
   doSort(array){
