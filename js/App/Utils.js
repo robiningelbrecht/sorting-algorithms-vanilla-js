@@ -6,7 +6,7 @@ export default class Utils {
 
   static getRandomSeries(length) {
     let series = [];
-    let max = 100;
+    let max = 99;
     let min = 10;
 
     while (series.length < length) {
