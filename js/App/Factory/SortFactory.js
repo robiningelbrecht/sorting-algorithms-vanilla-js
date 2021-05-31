@@ -3,6 +3,7 @@ import QuickSort from "../Sort/QuickSort.js";
 import SelectionSort from "../Sort/SelectionSort.js";
 import InsertionSort from "../Sort/InsertionSort.js";
 import MergeSort from "../Sort/MergeSort.js";
+import HeapSort from "../Sort/HeapSort.js";
 
 export default class SortFactory {
 
@@ -16,7 +17,9 @@ export default class SortFactory {
     }  else if (name === 'MergeSort') {
       return new MergeSort(visual, speed);
     } else if (name === 'QuickSort') {
-      return new name(visual, speed);
+      return new QuickSort(visual, speed);
+    } else if (name === 'HeapSort') {
+      return new HeapSort(visual, speed);
     }
   }
 
