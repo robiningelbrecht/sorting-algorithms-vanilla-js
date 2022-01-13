@@ -67,7 +67,7 @@ export default class VisualBase {
   }
 
   async _getExplanationContainer() {
-    let res = await fetch('/templates/' + this.explanationTemplate + '.html');
+    let res = await fetch('templates/' + this.explanationTemplate + '.html');
 
     let container = document.createElement('div');
     container.classList.add(...['explanation', 'd-flex', 'justify-content-center']);
