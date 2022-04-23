@@ -1,6 +1,6 @@
 # Sorting algorithms in vanilla JS
 
-Demo: [https://robiningelbrecht.github.io/projects/sorting-algorithms-vanilla-js/](https://robiningelbrecht.github.io/projects/sorting-algorithms-vanilla-js/)
+Demo: [https://sorting-algorithms-vanilla-js.robiningelbrecht.be/](https://sorting-algorithms-vanilla-js.robiningelbrecht.be/)
 
 ## Run local
 
